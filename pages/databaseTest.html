@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>個人知識庫_單機版</title>
+    <!-- https://electronjs.org/docs/tutorial/security#csp-meta-tag -->
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />    
+    <script type="text/javascript">window.$ = window.jQuery = parent.require('jquery');</script><!--Electron use JQuery-->
+    <script>parent.require('popper.js');</script>
+    <script>parent.require('bootstrap');</script>
+    <link href="../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../css/main.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row">
+            <main class="col-md-12 col-lg-10 px-4" role="main">
+                <input type="button" id="action-btn" value="Retrieve 10 first rows in the database" />
+                <table id="table" border="1">
+                    <tbody>
+                        
+                    </tbody>
+                </table>
+            </main>
+      </div>
+    </div>
+
+    <script type="text/javascript">
+        
+
+
+        function el(selector) {
+            return document.getElementById(selector);
+        }
+
+        el('action-btn').addEventListener('click', function(){
+            // Get the mysql service
+            getFirstTenRows(function(rows){
+                var html = '';
+
+                rows.forEach(function(row){
+                    html += '<tr>';
+                    html += '<td>';
+                    html += row.ID;
+                    html += '</td>';
+                    html += '<td>';
+                    html += row.PTYPE;
+                    html += '</td>';
+                    html += '</tr>';
+                    console.log(row);
+                });
+
+                document.querySelector('#table > tbody').innerHTML = html;
+            });
+        },false);
+
+        function getFirstTenRows(callback){
+            
+        var mysql      = parent.require('mariadb');
+        var connection = mysql.createConnection({
+        host     : 'localhost:3306',
+        user     : 'fwjdba',
+        password : 'fwjdba**831554'
+        });
+
+        connection.getConnection();
+
+        connection.query('SELECT 1 + 1 AS solution', function(err, rows, fields) {
+        if (err) throw err;
+        console.log('The solution is: ', rows[0].solution);
+        });
+
+        connection.end();
+
+
+        }
+
+    
+        /**
+         * 一進入頁面要做的事情
+         */
+        window.onload = function(){ 
+            
+        };
+       
+    </script>
+  </body>
+</html>

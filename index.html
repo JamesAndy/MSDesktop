@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>個人知識庫_單機版</title>
+    <!-- https://electronjs.org/docs/tutorial/security#csp-meta-tag -->
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+    <script type="text/javascript">window.$ = window.jQuery = require('jquery');</script><!--Electron use JQuery-->
+    
+    <script>require('popper.js');</script>
+    <script>require('bootstrap');</script>
+    <link href="./node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="css/main.css" rel="stylesheet">
+    <style media="screen">
+        .ifromDataMain{
+          width: 100%;
+          height: 90vh;
+        }
+        </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Company name</a>
+      <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+      <ul class="navbar-nav px-3">
+        <li class="nav-item text-nowrap">
+          <a class="nav-link" href="#">Sign out</a>
+        </li>
+      </ul>
+    </nav>
+    <div class="container-fluid">
+      <div class="row">
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+          <div class="sidebar-sticky">
+            <ul class="nav flex-column">
+              <li class="nav-item" onclick="changeIframeMain('pages/dashboard')"><a href="#" class="nav-link active">儀錶板</a></li>
+              <li class="nav-item" onclick="changeIframeMain('pages/systemInformation')"><a href="#" class="nav-link">系統資訊</a></li>
+              <li class="nav-item" onclick="changeIframeMain('pages/blank')"><a href="#" class="nav-link">空白頁面</a></li>
+              <li class="nav-item" onclick="changeIframeMain('pages/databaseTest')"><a href="#" class="nav-link">資料庫測試</a></li>
+            </ul>
+          </div>
+        </nav>
+        <main class="col-md-9 ml-sm-auto col-lg-10 px-4" role="main">
+            <div>
+                <iframe title="工作項目" id="ifromDataMain" class="page-header ifromDataMain"  frameborder="0" src="pages/dashboard.html" ></iframe>
+            </div>
+        </main>
+      </div>
+    </div>
+
+    <script type="text/javascript">
+
+      /*
+      *切換分頁
+      */
+      function changeIframeMain(srcValue,breadcrumbName){
+        jQuery("#ifromDataMain").attr("src",srcValue+".html");
+      }
+    
+      /**
+      * 一進入頁面要做的事情
+      */
+      window.onload = function(){ 
+      };
+
+      
+    </script>
+  </body>
+</html>
