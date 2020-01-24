@@ -9,80 +9,62 @@
     <script>parent.require('popper.js');</script>
     <script>parent.require('bootstrap');</script>
     <link href="../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="../css/main.css" rel="stylesheet">
-  </head>
+    <link href="../css/main.css" rel="stylesheet"/>
+  </head> 
   <body>
     <div class="container-fluid">
       <div class="row">
             <main class="col-md-12 col-lg-10 px-4" role="main">
-                <input type="button" id="action-btn" value="Retrieve 10 first rows in the database" />
-                <table id="table" border="1">
-                    <tbody>
-                        
-                    </tbody>
-                </table>
+              <form>
+                <div class="form-group">
+                  <label for="exampleInput">請輸入查詢條件</label>
+                  <input type="text" class="form-control" id="exampleInput" aria-describedby="exampleHelp" placeholder="請輸入查詢條件">
+                  <input type="text" id="tt" name="tt">
+                  <small id="exampleHelp" class="form-text text-muted">請輸入查詢條件</small>
+                </div>
+                <input type="button" id="action-btn" class="btn btn-primary" value="查詢" />
+              </form>
+              <table id="table" 
+              >
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">問題編號(TEKQ)</th>
+                    <th scope="col">提出時間</th>
+                    <th scope="col">提出單位(電話)</th>
+                    <th scope="col">提出者/分機/公務帳號</th>
+                    <th scope="col">程式名稱</th>
+                    <th scope="col">問題類型</th>
+                    <th scope="col">問題描述</th>
+                    <th scope="col">問題處理備註</th>
+                    <th scope="col">處理人</th>
+                    <th scope="col">完成備註</th>
+                    <th scope="col">完成時間</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    
+                </tbody>
+              </table>
+              
             </main>
       </div>
     </div>
-
+    <script src="../public.js"></script>
+    <script src="./databaseTest.js"></script>
     <script type="text/javascript">
-        
 
-
-        function el(selector) {
-            return document.getElementById(selector);
-        }
-
-        el('action-btn').addEventListener('click', function(){
-            // Get the mysql service
-            getFirstTenRows(function(rows){
-                var html = '';
-
-                rows.forEach(function(row){
-                    html += '<tr>';
-                    html += '<td>';
-                    html += row.ID;
-                    html += '</td>';
-                    html += '<td>';
-                    html += row.PTYPE;
-                    html += '</td>';
-                    html += '</tr>';
-                    console.log(row);
-                });
-
-                document.querySelector('#table > tbody').innerHTML = html;
-            });
-        },false);
-
-        function getFirstTenRows(callback){
-            
-        var mysql      = parent.require('mariadb');
-        var connection = mysql.createConnection({
-        host     : 'localhost:3306',
-        user     : 'fwjdba',
-        password : 'fwjdba**831554'
-        });
-
-        connection.getConnection();
-
-        connection.query('SELECT 1 + 1 AS solution', function(err, rows, fields) {
-        if (err) throw err;
-        console.log('The solution is: ', rows[0].solution);
-        });
-
-        connection.end();
-
-
-        }
-
+      function test(){
+        var searchData = $('#tt').val();
+    console.log("tt = "+searchData);
+      }
     
-        /**
-         * 一進入頁面要做的事情
-         */
-        window.onload = function(){ 
-            
-        };
-       
+      /**
+       * 一進入頁面要做的事情
+       */
+      window.onload = function(){ 
+          
+      };
     </script>
   </body>
 </html>

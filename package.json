@@ -23,9 +23,12 @@
   },
   "dependencies": {
     "bootstrap": "^4.3.1",
+    "bootstrap-table": "^1.15.5",
+    "datatables.net-autofill-dt": "^2.3.4",
+    "datatables.net-dt": "^1.10.20",
     "express": "^4.17.1",
     "jquery": "^3.4.1",
     "mariadb": "^2.1.2",
-    "popper.js": "^1.14.3"
+    "popper.js": "^1.16.0"
   }
 }
